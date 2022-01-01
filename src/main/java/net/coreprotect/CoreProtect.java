@@ -60,6 +60,7 @@ public final class CoreProtect extends JavaPlugin {
     /**
      * In which environment are we running?
      */
+    @SuppressWarnings("unused")
     public Environment getEnvironment() {
         return environment;
     }
@@ -67,6 +68,7 @@ public final class CoreProtect extends JavaPlugin {
     /**
      * Construct using the default plugin loader in a production environment.
      */
+    @SuppressWarnings("unused")
     CoreProtect() {
         super();
         environment = Environment.PRODUCTION;
@@ -75,6 +77,7 @@ public final class CoreProtect extends JavaPlugin {
     /**
      * Construct using a custom plugin loader in a testing environment. This is used by MockBukkit.
      */
+    @SuppressWarnings("unused")
     CoreProtect(final JavaPluginLoader loader, final PluginDescriptionFile description, final File dataFolder, final File file) {
         super(loader, description, dataFolder, file);
         environment = Environment.TESTING;
