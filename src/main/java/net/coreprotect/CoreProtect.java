@@ -73,7 +73,7 @@ public final class CoreProtect extends JavaPlugin {
     }
 
     /**
-     * Construct using a custom plugin loader in a testing environment. This is used by MockBukkit and is not to be used otherwise.
+     * Construct using a custom plugin loader in a testing environment. This is used by MockBukkit.
      */
     CoreProtect(final JavaPluginLoader loader, final PluginDescriptionFile description, final File dataFolder, final File file) {
         super(loader, description, dataFolder, file);
