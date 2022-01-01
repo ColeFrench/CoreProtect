@@ -21,6 +21,7 @@ import net.coreprotect.thread.NetworkHandler;
 import net.coreprotect.utility.Chat;
 import net.coreprotect.utility.Color;
 import net.coreprotect.utility.Util;
+import org.bukkit.plugin.java.JavaPluginLoader;
 
 public final class CoreProtect extends JavaPlugin {
 
@@ -44,6 +45,13 @@ public final class CoreProtect extends JavaPlugin {
      */
     public CoreProtectAPI getAPI() {
         return api;
+    }
+
+    /**
+     * Construct using a custom plugin loader. This is used by MockBukkit and is not to be used otherwise.
+     */
+    CoreProtect(final JavaPluginLoader loader, final PluginDescriptionFile description, final File dataFolder, final File file) {
+        super(loader, description, dataFolder, file);
     }
 
     @Override
