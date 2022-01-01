@@ -47,11 +47,37 @@ public final class CoreProtect extends JavaPlugin {
         return api;
     }
 
+    public enum Environment {
+        /** Deployed on a fully functioning server in the wild. All integrations should be enabled as configured. */
+        PRODUCTION,
+        /** Deployed on a test server. Some integrations may not be supported. */
+        TESTING
+    }
+
+    /** In which environment are we running? */
+    private final Environment environment;
+
     /**
-     * Construct using a custom plugin loader. This is used by MockBukkit and is not to be used otherwise.
+     * In which environment are we running?
+     */
+    public Environment getEnvironment() {
+        return environment;
+    }
+
+    /**
+     * Construct using the default plugin loader in a production environment.
+     */
+    CoreProtect() {
+        super();
+        environment = Environment.PRODUCTION;
+    }
+
+    /**
+     * Construct using a custom plugin loader in a testing environment. This is used by MockBukkit and is not to be used otherwise.
      */
     CoreProtect(final JavaPluginLoader loader, final PluginDescriptionFile description, final File dataFolder, final File file) {
         super(loader, description, dataFolder, file);
+        environment = Environment.TESTING;
     }
 
     @Override
@@ -115,11 +141,12 @@ public final class CoreProtect extends JavaPlugin {
             Consumer.startConsumer();
 
             // Enabling bStats
-            try {
-                new MetricsLite(this, 2876);
-            }
-            catch (Exception e) {
-                // Failed to connect to bStats server or something else went wrong.
+            if (environment == Environment.PRODUCTION) {
+                try {
+                    new MetricsLite(this, 2876);
+                } catch (Exception e) {
+                    // Failed to connect to bStats server or something else went wrong.
+                }
             }
         }
         else {
