@@ -52,7 +52,6 @@ nbproject
 
 target
 dependency-reduced-pom.xml
-test/
 
 # Wrapper files
 mvnw
