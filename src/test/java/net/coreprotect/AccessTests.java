@@ -23,7 +23,9 @@ class InitTests {
     @Test
     @Order(1)
     void testAPIAccess() {
-        Assertions.assertNotNull(plugin.getAPI());
+        final CoreProtectAPI api = plugin.getAPI();
+        Assertions.assertNotNull(api);
+        Assertions.assertTrue(api.isEnabled());
     }
 
     @Test
