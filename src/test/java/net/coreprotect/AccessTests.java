@@ -1,6 +1,7 @@
 package net.coreprotect;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import org.junit.jupiter.api.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -32,6 +33,19 @@ class InitTests {
     @Order(1)
     void testEnvironment() {
         Assertions.assertSame(CoreProtect.Environment.TESTING, plugin.getEnvironment());
+    }
+
+    @Test
+    @Order(1)
+    @DisplayName("Test enabling and disabling plugin")
+    void testAbling() {
+        final PluginManagerMock pluginManager = MockBukkit.getMock().getPluginManager();
+
+        pluginManager.disablePlugin(plugin);
+        Assertions.assertFalse(pluginManager.isPluginEnabled(plugin));
+
+        pluginManager.enablePlugin(plugin);
+        Assertions.assertTrue(pluginManager.isPluginEnabled(plugin));
     }
 
     @AfterAll
